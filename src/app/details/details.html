@@ -1,0 +1,41 @@
+@if (gotResource.isLoading()) {
+<got-loader />
+} @else if (gotResource.error()) {
+<p class="text-4xl text-red-400">Error cargar Personajes</p>
+} @else { @if (gotResource.value(); as character) {
+
+<div
+  class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
+>
+  <div class="container mx-auto px-4 py-8">
+    <a
+      [routerLink]="['']"
+      class="inline-flex items-center gap-2 text-amber-400 hover:text-amber-300 transition-colors duration-300 mb-8 group"
+    >
+      <lucide-icon
+        [img]="ArrowLeft"
+        class="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-300"
+      ></lucide-icon>
+      Volver a la lista
+    </a>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+    <div class="relative">
+      <div class="relative overflow-hidden rounded-lg shadow-2xl">
+        <img
+          width="120"
+          height="120"
+          [ngSrc]="character.imageUrl"
+          [alt]="character.fullName"
+          class="w-full h-96 md:h-[500px] object-cover"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"
+        ></div>
+      </div>
+    </div>
+    <got-info [character]="character" />
+  </div>
+</div>
+} }
