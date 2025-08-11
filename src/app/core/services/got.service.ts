@@ -6,7 +6,8 @@ import { GotCharacter } from '../models/got.model';
   providedIn: 'root'
 })
 export class GotService {
-  readonly #gotUrl = 'http://localhost:3000/personajes';
+  // readonly #gotUrl = 'http://localhost:3000/personajes';
+  readonly #gotUrl = 'https://angular-got.onrender.com/personajes';
 
   public readonly charactersResource: HttpResourceRef<GotCharacter[] | undefined>;
 
