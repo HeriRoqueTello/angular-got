@@ -8,16 +8,34 @@
   class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
 >
   <div class="container mx-auto px-4 py-8">
-    <a
-      [routerLink]="['']"
-      class="inline-flex items-center gap-2 text-amber-400 hover:text-amber-300 transition-colors duration-300 mb-8 group"
-    >
-      <lucide-icon
-        [img]="ArrowLeft"
-        class="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-300"
-      ></lucide-icon>
-      Volver a la lista
-    </a>
+    <div class="flex justify-between items-center mb-8">
+      <a
+        [routerLink]="['']"
+        class="inline-flex items-center gap-2 text-amber-400 hover:text-amber-300 transition-colors duration-300 mb-8 group"
+      >
+        <lucide-icon
+          [img]="ArrowLeft"
+          class="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-300"
+        ></lucide-icon>
+        Volver a la lista
+      </a>
+      <div class="flex gap-4">
+        <button
+          (click)="openEditModal()"
+          class="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white font-medium px-4 py-2 rounded-lg transition-colors duration-300"
+        >
+          <lucide-icon [img]="EditIcon" class="w-4 h-4"></lucide-icon>
+          Editar
+        </button>
+        <button
+          (click)="deleteCharacter()"
+          class="inline-flex items-center gap-2 bg-red-400 hover:bg-red-700 text-white font-medium px-4 py-2 rounded-lg transition-colors duration-300"
+        >
+          <lucide-icon [img]="DeleteIcon" class="w-4 h-4"></lucide-icon>
+          Eliminar
+        </button>
+      </div>
+    </div>
   </div>
 
   <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
@@ -38,4 +56,16 @@
     <got-info [character]="character" />
   </div>
 </div>
+<got-modal
+  [isOpen]="isEditModalOpen"
+  (onClose)="closeEditModal()"
+  title="Editar Personaje"
+>
+  <got-form
+    [character]="character"
+    [isEditing]="true"
+    (onEdit)="handleEditCharacter($event)"
+    (onCancel)="closeEditModal()"
+  ></got-form>
+</got-modal>
 } }

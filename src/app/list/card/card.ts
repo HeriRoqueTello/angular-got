@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { GotCharacter } from '../../core/types/got.type';
+import { GotCharacter } from '../../core/models/got.model';
 import { NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -23,6 +23,7 @@ import { RouterLink } from '@angular/router';
         <p class="text-xl font-semibold text-white group-hover:text-amber-400 transition-colors duration-300 text-center">
           {{gotResult().fullName}}
         </p>
+        <p class="text-slate-400 text-sm text-center truncate">{{gotResult().family}}</p>
       </div>
     </a>
   `,

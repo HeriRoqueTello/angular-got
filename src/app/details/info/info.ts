@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
-import { GotCharacter } from '../../core/types/got.type';
-import { CrownIcon, FileIcon, LucideAngularModule, ShieldIcon, UsersIcon } from 'lucide-angular';
+import { CrownIcon, LucideAngularModule, ShieldIcon, UsersIcon } from 'lucide-angular';
+import { GotCharacter } from '../../core/models/got.model';
 
 @Component({
   selector: 'got-info',

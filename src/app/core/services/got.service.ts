@@ -1,18 +1,38 @@
-import { httpResource, HttpResourceRef } from '@angular/common/http';
+import { HttpClient, httpResource, HttpResourceRef } from '@angular/common/http';
 import { Injectable, Signal } from '@angular/core';
-import { GotCharacter } from '../types/got.type';
+import { GotCharacter } from '../models/got.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GotService {
-  readonly #gotUrl = 'https://thronesapi.com/api/v2';
+  readonly #gotUrl = 'http://localhost:3000/personajes';
 
-  getGotList(): HttpResourceRef<GotCharacter[] | undefined> {
-    return httpResource<GotCharacter[]>(() => `${this.#gotUrl}/Characters`)
+  public readonly charactersResource: HttpResourceRef<GotCharacter[] | undefined>;
+
+  constructor(private http: HttpClient) {
+    this.charactersResource = httpResource<GotCharacter[]>(() => this.#gotUrl);
   }
+
 
   getCharacter(id: Signal<string>): HttpResourceRef<GotCharacter | undefined> {
-    return httpResource<GotCharacter>(() => `${this.#gotUrl}/Characters/${Number(id())}`);
+    return httpResource<GotCharacter>(() => `${this.#gotUrl}/${id()}`);
   }
+
+  addCharacter(character: Omit<GotCharacter, 'id'>) {
+    return this.http.post(this.#gotUrl, character);
+  }
+
+  updateCharacter(character: GotCharacter) {
+    return this.http.put(`${this.#gotUrl}/${character.id}`, character);
+  }
+
+  deleteCharacter(id: Signal<string>) {
+    return this.http.delete(`${this.#gotUrl}/${id()}`);
+  }
+
+  refreshCharacters() {
+    this.charactersResource.reload();
+  }
+
 }
