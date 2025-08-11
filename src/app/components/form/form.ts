@@ -191,7 +191,7 @@ export class Form implements OnInit {
       const formValue = this.characterForm.value
       const characterData = {
         ...formValue,
-        image: formValue.imageUrl, // Use imageUrl as image fallback
+        image: formValue.imageUrl,
       }
 
       if (this.isEditing && this.character) {
