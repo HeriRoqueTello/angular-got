@@ -1,5 +1,5 @@
 export interface GotCharacter {
-  id: number;
+  id: string;
   firstName: string;
   lastName: string;
   fullName: string;
